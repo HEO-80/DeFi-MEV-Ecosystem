@@ -26,51 +26,137 @@ The system was built iteratively — each repo is a step on the ladder, from a l
 
 ---
 
+
+# ⚡ DeFi-MEV-Ecosystem
+
+<img src="https://img.shields.io/badge/Solidity-363636?style=for-the-badge&logo=solidity&logoColor=white"/>
+<img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white"/>
+<img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white"/>
+<img src="https://img.shields.io/badge/Foundry-FFCB47?style=for-the-badge&logo=ethereum&logoColor=black"/>
+<img src="https://img.shields.io/badge/BNB_Chain-F0B90B?style=for-the-badge&logo=binance&logoColor=black"/>
+<img src="https://img.shields.io/badge/Ethereum-3C3C3D?style=for-the-badge&logo=ethereum&logoColor=white"/>
+
+**Complete MEV & DeFi arbitrage ecosystem — Flash Loans, Multi-DEX arbitrage and token sniping on BSC & Ethereum**
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hectorob/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/HEO-80)
+
+</div>
+
+---
+
+## 🧬 What is this?
+
+This repository is the **central documentation and unified contract layer** of a complete MEV ecosystem built from scratch. It contains the core Solidity contracts and links to the full off-chain C# controller series that drives them.
+
+The system was built iteratively — each repo is a step on the ladder, from a local Anvil test to autonomous operation on BSC Mainnet.
+
+---
+
 ## 🏗️ System Architecture
+
+![System Architecture](img/ecosystem-flow.svg)
+
+---
+
+## 📦 Contracts
+
+### `FlashLoanBot.sol` — Aave V3 Flash Loan Receiver *(full code)*
+- Inherits `FlashLoanSimpleReceiverBase` (Aave V3 official base)
+- Receives uncollateralized loans via `executeOperation()`
+- Interfaces with Uniswap V3 `ISwapRouter` → `exactInputSingle`
+- Full revert if repayment (`amount + premium`) cannot be covered
+- **Network:** Ethereum Mainnet · fork testing via Anvil
+
+### `MultiDexBot.sol` — Multi-DEX Arbitrage *(full code)*
+- Cross-DEX price imbalance exploitation
+- `EstimateGasAsync` before broadcast — prevents failed transactions
+- `SendTransactionAndWaitForReceiptAsync` — synchronous execution
+- Receipt status: `1` = profit retained · `0` = revert
+- **Network:** BSC / Ethereum
+
+### `ProfitBot.sol` — Gas-Optimized BSC Arbitrage *(architecture only)*
+- Buy on **PancakeSwap V3** → Sell on **PancakeSwap V2**
+- Dynamic gas estimation · atomic revert on loss · `Ownable`
+- **Network:** BNB Chain Mainnet
+- *Full implementation private — [contact via LinkedIn](https://www.linkedin.com/in/hectorob/)*
+
+### `SniperBot.sol` — Autonomous MEV Token Sniper *(architecture only)*
+- DexScreener detection → GoPlus security check → honeypot filter → atomic swap
+- TP/SL management · blacklist · tax simulation
+- **Network:** BSC Mainnet
+- *Full implementation private — [contact via LinkedIn](https://www.linkedin.com/in/hectorob/)*
+
+---
+
+## 🗺️ Full Ecosystem — Repo by Repo
+
+![Ecosystem Table](img/ecosystem-table.svg)
+
+---
+
+## 🔬 Key Technical Concepts
+
+**Flash Loans** — uncollateralized loans borrowed, used and repaid within a single block. If repayment fails, the entire transaction reverts as if it never happened.
+
+**MEV (Maximal Extractable Value)** — value extracted by reordering, inserting or censoring transactions within a block. This ecosystem focuses on arbitrage and sniping strategies.
+
+**AMM Formula** — `x * y = k`. All price calculations derive from this constant product formula used by Uniswap V2/V3 and PancakeSwap.
+
+**slot0** — the most gas-efficient read function in Uniswap V3 pools. Returns `sqrtPriceX96`, `tick` and liquidity in a single call.
+
+**Receipt Status** — `1` = transaction succeeded, profit retained. `0` = contract detected a loss, reverted — funds are safe.
+
+---
+
+## 🚀 Quick Start
+
+### Run contracts locally (Foundry)
+```bash
+# Fork Ethereum Mainnet
+anvil --fork-url https://eth-mainnet.g.alchemy.com/v2/YOUR_KEY
+
+# Fork BSC Mainnet
+anvil --fork-url https://bsc-mainnet.g.alchemy.com/v2/YOUR_KEY
+
+# Build
+forge build
+
+# Test
+forge test -vv
 ```
-                        OFF-CHAIN (C# / .NET)
-┌─────────────────────────────────────────────────────────────┐
-│                                                             │
-│   04_MarketScanner          10_RealPriceBrain               │
-│   📡 Reads Uniswap V3        🎯 Scans PancakeSwap           │
-│      slot0 every 3s             vs BiSwap spreads           │
-│            │                         │                      │
-│            └──────────┬──────────────┘                      │
-│                       │                                     │
-│              spread >= threshold?                           │
-│                       │                                     │
-│            ┌──────────▼──────────┐                          │
-│            │   09_ProfitBrain    │                          │
-│            │   🧠 Risk manager   │                          │
-│            │   EstimateGas →     │                          │
-│            │   WaitForReceipt    │                          │
-│            └──────────┬──────────┘                          │
-│                       │                                     │
-│            13_SniperBot (parallel)                          │
-│            🏹 New token detector                            │
-│                       │                                     │
-└───────────────────────┼─────────────────────────────────────┘
-                        │ RPC / Alchemy
-                        ▼
-                  ON-CHAIN (Solidity)
-┌─────────────────────────────────────────────────────────────┐
-│                                                             │
-│  ┌─────────────────┐      ┌─────────────────────────────┐  │
-│  │  FlashLoanBot   │      │        ProfitBot             │  │
-│  │  (Aave V3)      │      │  (PancakeSwap V2/V3 + BNB)  │  │
-│  │  Ethereum       │      │        BSC Mainnet           │  │
-│  └────────┬────────┘      └─────────────┬───────────────┘  │
-│           │                             │                   │
-│           └──────────────┬──────────────┘                   │
-│                          │                                  │
-│              ┌───────────▼───────────┐                      │
-│              │  SniperBot + MultiDex │                      │
-│              │  (BSC Mainnet)        │                      │
-│              └───────────────────────┘                      │
-│                                                             │
-│         x * y = k  ·  amountOutMin  ·  require(profit)     │
-└─────────────────────────────────────────────────────────────┘
+
+### Deploy to BSC Mainnet
+```bash
+forge create --rpc-url $ALCHEMY_URL_BNB \
+  --private-key $PRIVATE_KEY \
+  --broadcast \
+  --legacy \
+  contracts/ProfitBot.sol:ProfitBot
 ```
+
+> ⚠️ `--legacy` is mandatory on BNB Chain for type 0 transactions.
+
+### Run the off-chain radar
+```bash
+cd 10_RealPriceBrain
+dotnet run
+```
+
+---
+
+## 🏗️ Repository Structure
+
+![Repository Structure](img/repo-structure.svg)
+
+---
+
+## ⚖️ Disclaimer
+
+This project is for **educational and DeFi research purposes only**. The authors are not responsible for financial losses, regulatory violations, or any damages from using this software. Operating on Mainnet involves **real financial risk**.
+
+---
+
 
 ---
 
