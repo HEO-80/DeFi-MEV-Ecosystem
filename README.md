@@ -139,7 +139,6 @@ The system was built iteratively — each repo is a step on the ladder, from a l
 
 ---
 
-## 🏗️ Repository Structure
 ```
 DeFi-MEV-Ecosystem/
 ├── contracts/
@@ -153,6 +152,7 @@ DeFi-MEV-Ecosystem/
 └── README.md                     # This file
 ```
 
+---
 
 ## 🚀 Quick Start
 
