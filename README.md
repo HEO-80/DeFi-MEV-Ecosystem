@@ -27,30 +27,6 @@ The system was built iteratively — each repo is a step on the ladder, from a l
 ---
 
 
-# ⚡ DeFi-MEV-Ecosystem
-
-<img src="https://img.shields.io/badge/Solidity-363636?style=for-the-badge&logo=solidity&logoColor=white"/>
-<img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white"/>
-<img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white"/>
-<img src="https://img.shields.io/badge/Foundry-FFCB47?style=for-the-badge&logo=ethereum&logoColor=black"/>
-<img src="https://img.shields.io/badge/BNB_Chain-F0B90B?style=for-the-badge&logo=binance&logoColor=black"/>
-<img src="https://img.shields.io/badge/Ethereum-3C3C3D?style=for-the-badge&logo=ethereum&logoColor=white"/>
-
-**Complete MEV & DeFi arbitrage ecosystem — Flash Loans, Multi-DEX arbitrage and token sniping on BSC & Ethereum**
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hectorob/)
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/HEO-80)
-
-</div>
-
----
-
-## 🧬 What is this?
-
-This repository is the **central documentation and unified contract layer** of a complete MEV ecosystem built from scratch. It contains the core Solidity contracts and links to the full off-chain C# controller series that drives them.
-
-The system was built iteratively — each repo is a step on the ladder, from a local Anvil test to autonomous operation on BSC Mainnet.
-
 ---
 
 ## 🏗️ System Architecture
