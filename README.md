@@ -101,7 +101,6 @@ The system was built iteratively — each repo is a step on the ladder, from a l
 
 ---
 
-## 🗺️ Full Ecosystem — Repo by Repo
 
 | Phase | Repo | Role | Network |
 |:---:|:---|:---|:---|
