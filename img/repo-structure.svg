@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380" width="600" height="380">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e1a"/>
+      <stop offset="100%" style="stop-color:#0d1525"/>
+    </linearGradient>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="600" height="380" fill="url(#bg2)" rx="10"/>
+
+  <!-- Header -->
+  <text x="300" y="28" text-anchor="middle" fill="#f1f5f9" font-family="monospace" font-size="13" font-weight="bold" letter-spacing="2">📁 DeFi-MEV-Ecosystem</text>
+  <line x1="40" y1="38" x2="560" y2="38" stroke="#1e293b" stroke-width="0.5"/>
+
+  <!-- Root files -->
+  <text x="50" y="62" fill="#94a3b8" font-family="monospace" font-size="12">DeFi-MEV-Ecosystem/</text>
+
+  <!-- contracts/ folder -->
+  <g>
+    <text x="70" y="88" fill="#f59e0b" font-family="monospace" font-size="12">
+      <animate attributeName="opacity" values="1;0.7;1" dur="2s" repeatCount="indefinite"/>
+      ├── 📂 contracts/
+    </text>
+    <!-- FlashLoanBot -->
+    <text x="100" y="110" fill="#f97316" font-family="monospace" font-size="11">│   ├── 🔶 FlashLoanBot.sol</text>
+    <text x="330" y="110" fill="#475569" font-family="monospace" font-size="10">— Aave V3 · Ethereum</text>
+    <!-- ProfitBot -->
+    <text x="100" y="130" fill="#ec4899" font-family="monospace" font-size="11">│   ├── 🔶 ProfitBot.sol</text>
+    <text x="310" y="130" fill="#475569" font-family="monospace" font-size="10">— PancakeSwap V2/V3 · BSC</text>
+    <!-- SniperBot -->
+    <text x="100" y="150" fill="#f59e0b" font-family="monospace" font-size="11">│   ├── 🔶 SniperBot.sol</text>
+    <text x="305" y="150" fill="#475569" font-family="monospace" font-size="10">— MEV Sniper · BSC</text>
+    <!-- MultiDex -->
+    <text x="100" y="170" fill="#06b6d4" font-family="monospace" font-size="11">│   └── 🔶 MultiDexBot.sol</text>
+    <text x="316" y="170" fill="#475569" font-family="monospace" font-size="10">— Cross-DEX arbitrage</text>
+  </g>
+
+  <!-- img/ folder -->
+  <g>
+    <text x="70" y="196" fill="#8b5cf6" font-family="monospace" font-size="12">
+      <animate attributeName="opacity" values="1;0.7;1" dur="2.5s" repeatCount="indefinite"/>
+      ├── 📂 img/
+    </text>
+    <text x="100" y="216" fill="#7c3aed" font-family="monospace" font-size="11">│   ├── 🖼️  ecosystem-flow.svg</text>
+    <text x="100" y="234" fill="#7c3aed" font-family="monospace" font-size="11">│   ├── 🖼️  repo-structure.svg</text>
+    <text x="100" y="252" fill="#7c3aed" font-family="monospace" font-size="11">│   └── 🖼️  ecosystem-table.svg</text>
+  </g>
+
+  <!-- Root files -->
+  <text x="70" y="278" fill="#10b981" font-family="monospace" font-size="12">├── 📄 foundry.toml</text>
+  <text x="270" y="278" fill="#475569" font-family="monospace" font-size="10">— Foundry config</text>
+  <text x="70" y="298" fill="#10b981" font-family="monospace" font-size="12">├── 📄 remappings.txt</text>
+  <text x="280" y="298" fill="#475569" font-family="monospace" font-size="10">— Import remappings</text>
+  <text x="70" y="318" fill="#60a5fa" font-family="monospace" font-size="12">└── 📋 README.md</text>
+  <text x="252" y="318" fill="#475569" font-family="monospace" font-size="10">— This file</text>
+
+  <!-- Blinking cursor -->
+  <rect x="50" y="336" width="8" height="14" rx="1" fill="#60a5fa">
+    <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Bottom bar -->
+  <line x1="40" y1="355" x2="560" y2="355" stroke="#1e293b" stroke-width="0.5"/>
+  <text x="50" y="370" fill="#334155" font-family="monospace" font-size="9">4 contracts · 3 images · Foundry · MIT License</text>
+  <text x="550" y="370" text-anchor="end" fill="#334155" font-family="monospace" font-size="9">HEO-80</text>
+</svg>
