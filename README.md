@@ -63,79 +63,6 @@ The system was built iteratively — each repo is a step on the ladder, from a l
 - **Network:** BSC Mainnet
 - *Full implementation private — [contact via LinkedIn](https://www.linkedin.com/in/hectorob/)*
 
----
-
-## 🗺️ Full Ecosystem — Repo by Repo
-
-![Ecosystem Table](img/ecosystem-table.svg)
-
----
-
-## 🔬 Key Technical Concepts
-
-**Flash Loans** — uncollateralized loans borrowed, used and repaid within a single block. If repayment fails, the entire transaction reverts as if it never happened.
-
-**MEV (Maximal Extractable Value)** — value extracted by reordering, inserting or censoring transactions within a block. This ecosystem focuses on arbitrage and sniping strategies.
-
-**AMM Formula** — `x * y = k`. All price calculations derive from this constant product formula used by Uniswap V2/V3 and PancakeSwap.
-
-**slot0** — the most gas-efficient read function in Uniswap V3 pools. Returns `sqrtPriceX96`, `tick` and liquidity in a single call.
-
-**Receipt Status** — `1` = transaction succeeded, profit retained. `0` = contract detected a loss, reverted — funds are safe.
-
----
-
-## 🚀 Quick Start
-
-### Run contracts locally (Foundry)
-```bash
-# Fork Ethereum Mainnet
-anvil --fork-url https://eth-mainnet.g.alchemy.com/v2/YOUR_KEY
-
-# Fork BSC Mainnet
-anvil --fork-url https://bsc-mainnet.g.alchemy.com/v2/YOUR_KEY
-
-# Build
-forge build
-
-# Test
-forge test -vv
-```
-
-### Deploy to BSC Mainnet
-```bash
-forge create --rpc-url $ALCHEMY_URL_BNB \
-  --private-key $PRIVATE_KEY \
-  --broadcast \
-  --legacy \
-  contracts/ProfitBot.sol:ProfitBot
-```
-
-> ⚠️ `--legacy` is mandatory on BNB Chain for type 0 transactions.
-
-### Run the off-chain radar
-```bash
-cd 10_RealPriceBrain
-dotnet run
-```
-
----
-
-## 🏗️ Repository Structure
-
-![Repository Structure](img/repo-structure.svg)
-
----
-
-## ⚖️ Disclaimer
-
-This project is for **educational and DeFi research purposes only**. The authors are not responsible for financial losses, regulatory violations, or any damages from using this software. Operating on Mainnet involves **real financial risk**.
-
----
-
-
----
-
 ## 📦 Contracts in this repo
 
 ### `contracts/FlashLoanBot.sol` — Aave V3 Flash Loan Receiver
@@ -170,6 +97,12 @@ This project is for **educational and DeFi research purposes only**. The authors
 
 ## 🗺️ Full Ecosystem — Repo by Repo
 
+![Ecosystem Table](img/ecosystem-table.svg)
+
+---
+
+## 🗺️ Full Ecosystem — Repo by Repo
+
 | Phase | Repo | Role | Network |
 |:---:|:---|:---|:---|
 | 1 | [Flash_Loans](https://github.com/HEO-80/Flash_Loans) | ⚡ Aave V3 base receiver | Ethereum |
@@ -182,6 +115,7 @@ This project is for **educational and DeFi research purposes only**. The authors
 | 8 | [09_ProfitBrain](https://github.com/HEO-80/09_ProfitBrain) | 💰 Off-chain controller + risk mgmt | BSC |
 | 9 | [10_RealPriceBrain](https://github.com/HEO-80/10_RealPriceBrain) | 🎯 Multi-DEX spread radar | BSC |
 | 10 | [13_SniperBot](https://github.com/HEO-80/13_SniperBot) | 🏹 Autonomous MEV sniper | BSC |
+
 
 ---
 
@@ -197,7 +131,29 @@ This project is for **educational and DeFi research purposes only**. The authors
 
 **Receipt Status** — `1` = transaction succeeded and profit was retained. `0` = contract detected a loss and reverted — funds are safe.
 
+
 ---
+
+## 🏗️ Repository Structure
+
+![Repository Structure](img/repo-structure.svg)
+
+---
+
+## 🏗️ Repository Structure
+```
+DeFi-MEV-Ecosystem/
+├── contracts/
+│   ├── FlashLoanBot.sol          # Aave V3 Flash Loan receiver (Ethereum)
+│   ├── ProfitBot.sol             # Gas-optimized arbitrage (BSC Mainnet)
+│   ├── SniperBot.sol             # MEV token sniper (BSC)
+│   └── MultiDexArbitrage.sol     # Cross-DEX arbitrage
+├── docs/
+│   └── architecture.md           # Extended architecture notes
+├── foundry.toml                  # Foundry configuration
+└── README.md                     # This file
+```
+
 
 ## 🚀 Quick Start
 
@@ -233,24 +189,8 @@ forge create --rpc-url $ALCHEMY_URL_BNB \
 cd 10_RealPriceBrain
 cp .env.example .env   # fill ALCHEMY_URL, PRIVATE_KEY, BOT_ADDRESS
 dotnet run
-```
 
----
-
-## 🏗️ Repository Structure
 ```
-DeFi-MEV-Ecosystem/
-├── contracts/
-│   ├── FlashLoanBot.sol          # Aave V3 Flash Loan receiver (Ethereum)
-│   ├── ProfitBot.sol             # Gas-optimized arbitrage (BSC Mainnet)
-│   ├── SniperBot.sol             # MEV token sniper (BSC)
-│   └── MultiDexArbitrage.sol     # Cross-DEX arbitrage
-├── docs/
-│   └── architecture.md           # Extended architecture notes
-├── foundry.toml                  # Foundry configuration
-└── README.md                     # This file
-```
-
 ---
 
 ## ⚖️ Disclaimer
